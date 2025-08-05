@@ -9,12 +9,12 @@ producer = KafkaProducer(
     value_serializer=lambda v: json.dumps(v).encode("utf-8")
 )
 
-device_ids = [f'dev-{i}' for i in range(1,11)]
+device_ids = [f'dev-{i}' for i in range(1,6)]
 
 def generating_data():
     data = []
     for dev_id in device_ids:
-        temp = round(random.uniform(75,100),2)
+        temp = round(random.uniform(1,100))
         payload = {
             "device_id": dev_id,
             "temperature": temp,
