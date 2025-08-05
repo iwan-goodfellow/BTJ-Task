@@ -18,3 +18,11 @@ producer = KafkaProducer(
 )
 
 print("Consumer started. Listening for IoT data...")
+
+for message in consumer:
+    data = message.value
+    print(f"[📥 Received] {data}")
+    if data["temperature"] > 95:
+        print("🚨 ALERT: Temperature > 95!")
+        producer.send(ALERT_TOPIC, value=data)
+        producer.flush()
